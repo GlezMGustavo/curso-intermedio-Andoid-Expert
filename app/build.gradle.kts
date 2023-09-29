@@ -1,6 +1,8 @@
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
+    id("kotlin-kapt")
+    id("com.google.dagger.hilt.android")
 }
 
 android {
@@ -37,12 +39,24 @@ android {
     buildFeatures{
         viewBinding = true
     }
+
+// en el video explica esto de abajo en la hora 1:30, a mi no me ha dado problema por eso lo comente
+//    kotlin {
+//        jvmToolchain(8)
+//    }
 }
 
 dependencies {
 
-    implementation("androidx.navigation:navigation-fragment-ktx:2.7.3")
-    implementation("androidx.navigation:navigation-ui-ktx:2.7.3")
+    // Navigation Component
+    val navVersion = "2.7.3"
+    implementation("androidx.navigation:navigation-fragment-ktx:$navVersion")
+    implementation("androidx.navigation:navigation-ui-ktx:$navVersion")
+
+    // DaggerHilt
+    implementation("com.google.dagger:hilt-android:2.48")
+    kapt("com.google.dagger:hilt-compiler:2.48")
+
 
     implementation("androidx.core:core-ktx:1.9.0")
     implementation("androidx.appcompat:appcompat:1.6.1")
@@ -52,8 +66,5 @@ dependencies {
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
 
-    // Navigation Component
-    //val navVersion = "2.7.1"
-    //implementation("android.navigation:navigation-fragment-ktx:$navVersion")
-    //implementation("android.navigation:navigation-ui-ktx:$navVersion")
+
 }
